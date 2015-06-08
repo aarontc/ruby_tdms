@@ -33,7 +33,7 @@ READING
 WRITING
 =======
 
-tdms = Tdms::File.new("some filename")
+tdms = TDMS::File.new("some filename")
 seg = tdms.segment.build
 
 group = seg.groups.build("foo")

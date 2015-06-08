@@ -1,15 +1,10 @@
-here = File.expand_path('..', __FILE__)
-$LOAD_PATH.unshift File.join(here, 'lib')
-$LOAD_PATH.unshift File.join(here, 'test')
+require 'bundler/gem_tasks'
+require 'rake/testtask'
 
-desc "Run tests"
-task :test do
-  require 'tdms'
-  require 'test_helper'
-
-  Dir.chdir(File.join(here, 'test')) do
-    Dir['**/*_test.rb'].each { |file| require file }
-  end
+Rake::TestTask.new(:test) do |t|
+	t.libs << 'test'
+	t.libs << 'lib'
+	t.test_files = FileList['test/**/*_test.rb']
 end
 
-task :default => [:test]
+task :default => :test

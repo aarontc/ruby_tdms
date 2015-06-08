@@ -1,9 +1,12 @@
-require 'test/unit'
+require 'minitest/autorun'
 
-class Test::Unit::TestCase
+require_relative '../lib/tdms'
 
-  def fixture_filename(fixture_name)
-    File.dirname(__FILE__) + "/fixtures/#{fixture_name}.tdms"
-  end
+class Minitest::Test
+
+	def fixture_filename(fixture_name)
+		File.dirname(__FILE__) + "/fixtures/#{fixture_name}.tdms"
+	end
 
 end
+
