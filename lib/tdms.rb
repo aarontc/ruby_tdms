@@ -1,3 +1,5 @@
+require 'tdms/version'
+
 require 'tdms/document'
 require 'tdms/streaming'
 require 'tdms/property'

@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    tdms (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.5.1)
+    rake (10.3.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.10)
+  minitest
+  rake (~> 10.0)
+  tdms!
+
+BUNDLED WITH
+   1.10.3

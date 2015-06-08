@@ -24,5 +24,5 @@ read the example TDMS file that comes with NI DIAdem.
 
 ## Contributors
 
-[Mike Naberezny](http://github.com/mnaberez) is the author of TDMS for
+[Mike Naberezny](http://github.com/mnaberez) is the original author of TDMS for
 Ruby.  Development is sponsored by [Maintainable](http://maintainable.com).
