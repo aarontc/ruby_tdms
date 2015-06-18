@@ -13,10 +13,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.10)
+  bundler (>= 1.7)
   minitest
   rake (~> 10.0)
   tdms!
-
-BUNDLED WITH
-   1.10.3
