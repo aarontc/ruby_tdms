@@ -8,7 +8,7 @@ class ReadType02Int16Test < Minitest::Test
 
 		assert_equal 1, doc.segments.size
 		assert_equal 1, doc.segments[0].objects.size
-		assert_equal TDMS::DataType::Int16::Id, doc.segments[0].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Int16::ID, doc.segments[0].objects[0].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == "/'int16_group'/'int16_channel'" }
 		assert_equal 5, chan.values.size
@@ -23,8 +23,8 @@ class ReadType02Int16Test < Minitest::Test
 
 		assert_equal 1, doc.segments.size
 		assert_equal 2, doc.segments[0].objects.size
-		assert_equal TDMS::DataType::Int16::Id, doc.segments[0].objects[0].data_type_id
-		assert_equal TDMS::DataType::Int16::Id, doc.segments[0].objects[1].data_type_id
+		assert_equal TDMS::DataTypes::Int16::ID, doc.segments[0].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Int16::ID, doc.segments[0].objects[1].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == "/'int16_group'/'int16_channel_a'" }
 		assert_equal 5, chan.values.size
@@ -45,9 +45,9 @@ class ReadType02Int16Test < Minitest::Test
 		assert_equal 1, doc.segments[0].objects.size
 		assert_equal 1, doc.segments[1].objects.size
 		assert_equal 1, doc.segments[2].objects.size
-		assert_equal TDMS::DataType::Int16::Id, doc.segments[0].objects[0].data_type_id
-		assert_equal TDMS::DataType::Int16::Id, doc.segments[1].objects[0].data_type_id
-		assert_equal TDMS::DataType::Int16::Id, doc.segments[2].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Int16::ID, doc.segments[0].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Int16::ID, doc.segments[1].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Int16::ID, doc.segments[2].objects[0].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == "/'int16_group'/'int16_channel'" }
 		assert_equal 15, chan.values.size

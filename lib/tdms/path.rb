@@ -1,5 +1,4 @@
 module TDMS
-
 	class Path
 		attr_reader :group, :channel
 
@@ -9,6 +8,7 @@ module TDMS
 			@channel = options[:channel] if options[:channel]
 		end
 
+
 		def load(path)
 			segments = path.split('/').map do |seg|
 				seg.sub(/^'/, '').sub(/'$/, '').sub("''", "'")
@@ -17,15 +17,17 @@ module TDMS
 			_, @group, @channel = *segments
 		end
 
+
 		def ==(other)
-			if other.is_a?(String)
+			if other.is_a? String
 				self.to_s == other
-			elsif other.is_a?(Path)
+			elsif other.is_a? Path
 				self.dump == other.dump
 			else
 				super
 			end
 		end
+
 
 		def dump
 			raise ArgumentError if channel && group.nil?
@@ -38,17 +40,21 @@ module TDMS
 			dumped.empty? ? '/' : dumped
 		end
 
+
 		def to_s
 			dump
 		end
+
 
 		def root?
 			(!channel?) && (!group?)
 		end
 
+
 		def group?
 			(!@group.nil?) && (@channel.nil?)
 		end
+
 
 		def channel?
 			(!@channel.nil?)

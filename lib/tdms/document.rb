@@ -1,5 +1,6 @@
-module TDMS
+require_relative 'segment'
 
+module TDMS
 	class Document
 		attr_reader :segments, :channels, :file
 
@@ -9,20 +10,22 @@ module TDMS
 			build_aggregates
 		end
 
+
+
 		private
 
 		def parse_segments
 			@segments = []
 
 			until file.eof?
-				segment = TDMS::Segment.new
+				segment = Segment.new
 				segment.prev_segment = @segments[-1]
 				@segments << segment
 
-				lead_in = @file.read(0x1C)
+				lead_in = @file.read 0x1C
 				metadata_pos = @file.pos
 
-				unpacked = lead_in.unpack('a4VVQQ')
+				unpacked = lead_in.unpack 'a4VVQQ'
 				tdms_tag = unpacked[0] # char[4]
 				toc_flags = unpacked[1] # u32
 				tdms_version = unpacked[2] # u32
@@ -68,8 +71,8 @@ module TDMS
 						chan.dimension = decoded[1] # next 4 bytes u32
 						chan.num_values = decoded[2] # next 8 bytes u64
 
-						data_type = TDMS::DataType.find_by_id(chan.data_type_id)
-						fixed_length = data_type::LengthInBytes
+						data_type = DataTypes.find_by_id(chan.data_type_id)
+						fixed_length = data_type::LENGTH_IN_BYTES
 
 						raw_data_pos_obj += if fixed_length
 												chan.num_values * fixed_length

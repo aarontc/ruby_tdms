@@ -1,5 +1,4 @@
 module TDMS
-
 	class Segment
 		attr_accessor :prev_segment
 		attr_reader :objects
@@ -8,5 +7,4 @@ module TDMS
 			@objects = []
 		end
 	end
-
 end
