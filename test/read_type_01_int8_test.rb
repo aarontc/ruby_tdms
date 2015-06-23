@@ -7,10 +7,10 @@ class ReadType01Int8Test < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
-		assert_equal 1, doc.segments[0].objects.size
-		assert_equal TDMS::DataTypes::Int8::ID, doc.segments[0].objects[0].data_type_id
+		assert_equal 1, doc.channels.size
+		assert_equal TDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
 
-		chan = doc.channels.find { |ch| ch.path == "/'int8_group'/'int8_channel'" }
+		chan = doc.channels.find { |ch| ch.path == '/int8_group/int8_channel' }
 		assert_equal 5, chan.values.size
 
 		expected = [-128, -64, 0, 63, 127]
@@ -22,16 +22,16 @@ class ReadType01Int8Test < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
-		assert_equal 2, doc.segments[0].objects.size
-		assert_equal TDMS::DataTypes::Int8::ID, doc.segments[0].objects[0].data_type_id
-		assert_equal TDMS::DataTypes::Int8::ID, doc.segments[0].objects[1].data_type_id
+		assert_equal 2, doc.channels.size
+		assert_equal TDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
+		assert_equal TDMS::DataTypes::Int8::ID, doc.channels[1].data_type_id
 
-		chan = doc.channels.find { |ch| ch.path == "/'int8_group'/'int8_channel_a'" }
+		chan = doc.channels.find { |ch| ch.path == '/int8_group/int8_channel_a' }
 		assert_equal 5, chan.values.size
 		expected = [-128, -64, 0, 63, 127]
 		assert_equal expected, chan.values.to_a
 
-		chan = doc.channels.find { |ch| ch.path == "/'int8_group'/'int8_channel_b'" }
+		chan = doc.channels.find { |ch| ch.path == '/int8_group/int8_channel_b' }
 		assert_equal 5, chan.values.size
 		expected = [127, 63, 0, -64, -128]
 		assert_equal expected, chan.values.to_a
@@ -42,14 +42,14 @@ class ReadType01Int8Test < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 3, doc.segments.size
-		assert_equal 1, doc.segments[0].objects.size
+		assert_equal 1, doc.channels.size
 		assert_equal 1, doc.segments[1].objects.size
 		assert_equal 1, doc.segments[2].objects.size
-		assert_equal TDMS::DataTypes::Int8::ID, doc.segments[0].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
 		assert_equal TDMS::DataTypes::Int8::ID, doc.segments[1].objects[0].data_type_id
 		assert_equal TDMS::DataTypes::Int8::ID, doc.segments[2].objects[0].data_type_id
 
-		chan = doc.channels.find { |ch| ch.path == "/'int8_group'/'int8_channel'" }
+		chan = doc.channels.find { |ch| ch.path == '/int8_group/int8_channel' }
 		assert_equal 15, chan.values.size
 		expected = [-128, -64, 0, 63, 127,
 			-128, -64, 0, 63, 127,
