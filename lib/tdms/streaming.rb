@@ -3,11 +3,11 @@ require_relative 'data_types'
 
 module TDMS
 	module Streaming
-		def read_property
+		def read_property(big_endian)
 			name = read_utf8_string
 			type_id = read_u32
 
-			data = DataTypes.find_by_id(type_id).read_from_stream self
+			data = DataTypes.find_by_id(type_id).read_from_stream self, big_endian
 			Property.new name, data
 		end
 

@@ -6,7 +6,7 @@ module TDMS
 			ID = 0x20
 			LENGTH_IN_BYTES = nil
 
-			def self.read_from_stream(tdms_file)
+			def self.read_from_stream(tdms_file, big_endian)
 				new tdms_file.read_utf8_string
 			end
 		end
