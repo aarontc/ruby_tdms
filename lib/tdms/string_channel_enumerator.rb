@@ -5,29 +5,29 @@ module TDMS
 		def initialize(channel)
 			@channel = channel
 
-			@index_pos = @channel.raw_data_pos
-			@data_pos = @index_pos + (4 * @channel.num_values)
+			@index_offset = @channel.raw_data_offset
+			@data_offset = @index_offset + (4 * @channel.value_count)
 		end
 
 
 		def size
-			@size ||= @channel.num_values
+			@size ||= @channel.value_count
 		end
 
 
 		def each
-			data_pos = @data_pos
+			data_pos = @data_offset
 
 			0.upto(size - 1) do |i|
-				index_pos = @index_pos + (4 * i)
+				index_pos = @index_offset + (4 * i)
 
-				@channel.file.seek index_pos
-				next_data_pos = @data_pos + @channel.file.read_u32
+				@channel.stream.seek index_pos
+				next_data_pos = @data_offset + @channel.stream.read_u32
 
 				length = next_data_pos - data_pos
 
-				@channel.file.seek data_pos
-				yield @channel.file.read(length)
+				@channel.stream.seek data_pos
+				yield @channel.stream.read(length)
 
 				data_pos = next_data_pos
 			end
