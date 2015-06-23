@@ -52,7 +52,8 @@ class ReadType05Uint8Test < Minitest::Test
 		chan = doc.channels.find { |ch| ch.path == '/uint8_group/uint8_channel' }
 		assert_equal 15, chan.values.size
 		expected = [0, 1, 62, 127, 255, 0, 1, 62, 127, 255, 0, 1, 62, 127, 255]
-		assert_equal expected, chan.values.to_a
+		actual = chan.values.to_a
+		assert_equal expected, actual, 'Reading values from TDMS file returned incorrect results'
 	end
 
 end

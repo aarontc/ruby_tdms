@@ -12,6 +12,26 @@ module TDMS
 		end
 
 
+		def dump
+			to_s
+		end
+
+
+		def hash
+			to_s.hash
+		end
+
+
+		def inspect
+			"#<#{self.class.name}:#{self.object_id} path=#{path.inspect}>"
+		end
+
+
+		def load(string)
+			self.path = string
+		end
+
+
 		def path
 			'/' + @parts.map{ |part| part.gsub('/', '\/') }.join('/')
 		end
@@ -37,6 +57,11 @@ module TDMS
 		end
 
 
+		def to_s
+			path
+		end
+
+
 		def ==(other)
 			if other.is_a? String
 				self.to_s == other
@@ -47,20 +72,7 @@ module TDMS
 			end
 		end
 
-
-		def dump
-			to_s
-		end
-
-
-		def to_s
-			path
-		end
-
-
-		def inspect
-			"#<#{self.class.name}:#{self.object_id} path=#{path.inspect}>"
-		end
+		alias eql? ==
 
 
 		protected

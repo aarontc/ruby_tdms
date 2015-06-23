@@ -25,12 +25,18 @@ module TDMS
 							# TODO: Implement support for this
 							raise NotImplementedError, 'DAQmx Digital Line scaler support is not implemented'
 						when 0x00000000
-							# Identical to previous segment
-							raise "reused object meta data -- handle this!"
+							# Identical to previous segment, so clone the channel object and have it update streaming parameters
+							previous_channel = document.objects.reverse.find { |object| object.path == path }
+							Objects::Channel.new(path, document, segment).tap { |obj|
+								obj.continue_stream stream, raw_index, previous_channel
+								group = document.objects.reverse.find { |object| object.is_a? Objects::Group and object.path == Path.new(parts: path.to_a[0..-2])}
+								group.channels << obj if group
+							}
 						else
 							Objects::Channel.new(path, document, segment).tap { |obj|
 								obj.parse_stream stream, raw_index
-								document.objects[-1].channels << obj if document.objects[-1]
+								group = document.objects.reverse.find { |object| object.is_a? Objects::Group and object.path == Path.new(parts: path.to_a[0..-2]) }
+								group.channels << obj if group
 							}
 					end
 

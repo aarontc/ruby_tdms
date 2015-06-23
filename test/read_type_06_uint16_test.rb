@@ -19,7 +19,7 @@ class ReadType06Uint16Test < Minitest::Test
 
 	def test_reads_two_uint16_channels_in_one_segment
 		filename = fixture_filename('type_06_uint16_two_channels_one_segment')
-		doc = TDMS::File.parse(filename)
+		doc = TDMS::File.parse filename
 
 		assert_equal 1, doc.segments.size
 		assert_equal 2, doc.channels.size

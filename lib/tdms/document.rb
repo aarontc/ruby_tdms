@@ -8,16 +8,17 @@ module TDMS
 		attr_reader :segments, :stream
 
 		def initialize(stream)
+			@channel_aggregates = []
 			@segments = []
 			@stream = stream
 
 			parse_segments
-#			build_aggregates
+			build_aggregates
 		end
 
 
 		def channels
-			objects.select { |object| object.is_a? Objects::Channel }
+			@channel_aggregates
 		end
 
 
@@ -26,6 +27,10 @@ module TDMS
 		end
 
 
+		# @return [Array<TDMS::Objects::Channel>] The un-aggregated channel objects in the current document.
+		def raw_channels
+			objects.select { |object| object.is_a? Objects::Channel }
+		end
 
 		protected
 
@@ -33,26 +38,25 @@ module TDMS
 			until stream.eof?
 				segment = Segment.parse_stream(stream, self)
 				break if segment.nil?
-				@segments << segment
+				#@segments << segment
 				next_segment_offset = segment.meta_data_offset._?(segment.raw_data_offset) + segment.length
 				stream.seek next_segment_offset
 			end
 		end
 
-		# def build_aggregates
-		# 	@channels = []
-		#
-		# 	channels_by_path = {}
-		# 	segments.each do |segment|
-		# 		segment.objects.select { |o| o.channel }.each do |ch|
-		# 			(channels_by_path[ch.channel.path.to_s] ||= []) << ch
-		# 		end
-		# 	end
-		#
-		# 	channels_by_path.each do |path, channels|
-		# 		@channels << AggregateChannel.new(channels)
-		# 	end
-		# end
+
+		def build_aggregates
+			channels_by_path =
+				raw_channels.reduce({}) do |hash, channel|
+					hash[channel.path] ||= []
+					hash[channel.path] << channel
+					hash
+				end
+
+			channels_by_path.each_pair do |path, channels|
+				@channel_aggregates << AggregateChannel.new(channels)
+			end
+		end
 	end
 
 end
