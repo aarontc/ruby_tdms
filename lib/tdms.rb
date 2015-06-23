@@ -1,10 +1,2 @@
-require 'tdms/version'
-
-require 'tdms/document'
-require 'tdms/streaming'
-require 'tdms/property'
-require 'tdms/datatypes'
-require 'tdms/segment'
-require 'tdms/channel'
-require 'tdms/path'
-require 'tdms/aggregate'
+require 'require_all'
+require_rel 'tdms'

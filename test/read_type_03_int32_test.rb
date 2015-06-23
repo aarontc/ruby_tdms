@@ -7,10 +7,10 @@ class ReadType03Int32Test < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
-		assert_equal 1, doc.segments[0].objects.size
-		assert_equal TDMS::DataType::Int32::Id, doc.segments[0].objects[0].data_type_id
+		assert_equal 1, doc.channels.size
+		assert_equal TDMS::DataTypes::Int32::ID, doc.channels[0].data_type_id
 
-		chan = doc.channels.find { |ch| ch.path == "/'int32_group'/'int32_channel'" }
+		chan = doc.channels.find { |ch| ch.path == '/int32_group/int32_channel' }
 		assert_equal 5, chan.values.size
 
 		expected = [-2_147_483_648, -1_073_741_824, 0, 10_737_41_823, 2_147_483_647]
@@ -22,16 +22,16 @@ class ReadType03Int32Test < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
-		assert_equal 2, doc.segments[0].objects.size
-		assert_equal TDMS::DataType::Int32::Id, doc.segments[0].objects[0].data_type_id
-		assert_equal TDMS::DataType::Int32::Id, doc.segments[0].objects[1].data_type_id
+		assert_equal 2, doc.channels.size
+		assert_equal TDMS::DataTypes::Int32::ID, doc.channels[0].data_type_id
+		assert_equal TDMS::DataTypes::Int32::ID, doc.channels[1].data_type_id
 
-		chan = doc.channels.find { |ch| ch.path == "/'int32_group'/'int32_channel_a'" }
+		chan = doc.channels.find { |ch| ch.path == '/int32_group/int32_channel_a' }
 		assert_equal 5, chan.values.size
 		expected = [-2_147_483_648, -1_073_741_824, 0, 10_737_41_823, 2_147_483_647]
 		assert_equal expected, chan.values.to_a
 
-		chan = doc.channels.find { |ch| ch.path == "/'int32_group'/'int32_channel_b'" }
+		chan = doc.channels.find { |ch| ch.path == '/int32_group/int32_channel_b' }
 		assert_equal 5, chan.values.size
 		expected = [2_147_483_647, 1_073_741_823, 0, -1_073_741_824, -2_147_483_648]
 		assert_equal expected, chan.values.to_a
@@ -42,14 +42,14 @@ class ReadType03Int32Test < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 3, doc.segments.size
-		assert_equal 1, doc.segments[0].objects.size
+		assert_equal 1, doc.channels.size
 		assert_equal 1, doc.segments[1].objects.size
 		assert_equal 1, doc.segments[2].objects.size
-		assert_equal TDMS::DataType::Int32::Id, doc.segments[0].objects[0].data_type_id
-		assert_equal TDMS::DataType::Int32::Id, doc.segments[1].objects[0].data_type_id
-		assert_equal TDMS::DataType::Int32::Id, doc.segments[2].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Int32::ID, doc.channels[0].data_type_id
+		assert_equal TDMS::DataTypes::Int32::ID, doc.segments[1].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Int32::ID, doc.segments[2].objects[0].data_type_id
 
-		chan = doc.channels.find { |ch| ch.path == "/'int32_group'/'int32_channel'" }
+		chan = doc.channels.find { |ch| ch.path == '/int32_group/int32_channel' }
 		assert_equal 15, chan.values.size
 		expected = [-2_147_483_648, -1_073_741_824, 0, 10_737_41_823, 2_147_483_647,
 			-2_147_483_648, -1_073_741_824, 0, 10_737_41_823, 2_147_483_647,

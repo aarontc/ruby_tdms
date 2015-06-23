@@ -1,57 +1,96 @@
 module TDMS
-
 	class Path
-		attr_reader :group, :channel
+		PATH_MATCHER = /(?:(?<!\\))\//
+		RAW_MATCHER = /(?:^|(?<='))\/(?:(?=')|$)/
 
-		def initialize(options={})
-			load(options[:path]) if options[:path]
-			@group = options[:group] if options[:group]
-			@channel = options[:channel] if options[:channel]
+		# Can initialize with parts, path, or raw. Elements can contain / only in raw or parts forms.
+		def initialize(options = {})
+			raise ArgumentError, 'Initialize with at most one of +parts+, +path+, or +raw+.' if options.length > 1
+			@parts = options[:parts] || []
+			self.path = options[:path] if options.has_key? :path
+			self.raw = options[:raw] if options.has_key? :raw
 		end
 
-		def load(path)
-			segments = path.split('/').map do |seg|
-				seg.sub(/^'/, '').sub(/'$/, '').sub("''", "'")
-			end
 
-			_, @group, @channel = *segments
+		def dump
+			to_s
 		end
+
+
+		def hash
+			to_s.hash
+		end
+
+
+		def inspect
+			"#<#{self.class.name}:#{self.object_id} path=#{path.inspect}>"
+		end
+
+
+		def load(string)
+			self.path = string
+		end
+
+
+		def path
+			'/' + @parts.map{ |part| part.gsub('/', '\/') }.join('/')
+		end
+
+
+		def path=(value)
+			@parts = value._?('').split(PATH_MATCHER).reject { |x| x.length == 0 }.map { |part| decode_part part }
+		end
+
+
+		def raw
+			'/' + @parts.map { |part| encode_part part }.join('/')
+		end
+
+
+		def raw=(value)
+			@parts = value._?('').split(RAW_MATCHER).reject { |x| x.length == 0 }.map { |part| decode_raw_part part }
+		end
+
+
+		def to_a
+			@parts
+		end
+
+
+		def to_s
+			path
+		end
+
 
 		def ==(other)
-			if other.is_a?(String)
+			if other.is_a? String
 				self.to_s == other
-			elsif other.is_a?(Path)
+			elsif other.is_a? self.class
 				self.dump == other.dump
 			else
 				super
 			end
 		end
 
-		def dump
-			raise ArgumentError if channel && group.nil?
+		alias eql? ==
 
-			parts = ['']
-			parts << ("'" + group.sub("'", "''") + "'") if group
-			parts << ("'" + channel.sub("'", "''") + "'") if channel
 
-			dumped = parts.join('/')
-			dumped.empty? ? '/' : dumped
+		protected
+
+		def decode_part(part)
+			part.gsub(/\\\//, '/')
 		end
 
-		def to_s
-			dump
+
+		def decode_raw_part(part)
+			part.gsub(/(^'|'$)/, '').gsub(/''/, "'")
 		end
 
-		def root?
-			(!channel?) && (!group?)
-		end
 
-		def group?
-			(!@group.nil?) && (@channel.nil?)
-		end
-
-		def channel?
-			(!@channel.nil?)
+		# Pure part representation -> raw encoded representation
+		# "my / part's / awesomeness" -> "'my / part''s / awesomeness'"
+		def encode_part(part)
+			"'#{part.gsub(/'/, "''")}'"
 		end
 	end
 
