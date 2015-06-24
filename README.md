@@ -18,11 +18,9 @@ TDMS files on Unix-like platforms.
 This library is very early in development but is complete enough to
 read the example TDMS file that comes with NI DIAdem.
 
- - Segments with interleaved measurements are not yet supported.
- - Segments with big endian data are not yet supported.
  - Writing TDMS files is not yet supported.
 
 ## Contributors
 
 [Mike Naberezny](http://github.com/mnaberez) is the original author of TDMS for
-Ruby.  Development is sponsored by [Maintainable](http://maintainable.com).
+Ruby.  Mike's development is sponsored by [Maintainable](http://maintainable.com).
