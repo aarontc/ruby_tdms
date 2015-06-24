@@ -37,8 +37,8 @@ module TDMS
 		end
 
 
-		def to_hash
-			result = @channels[0].to_hash
+		def as_json
+			result = @channels[0].as_json
 			# Iterate over all channel objects and update properties
 			result[:properties] = @channels.reduce({}) do |properties, channel|
 				channel.properties.each do |property|

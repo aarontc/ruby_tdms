@@ -19,7 +19,7 @@ module TDMS
 			end
 
 
-			def to_hash
+			def as_json
 				super.merge({
 						name: name,
 						data_type: data_type.name.split('::').last,

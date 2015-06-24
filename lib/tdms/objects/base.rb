@@ -23,7 +23,7 @@ module TDMS
 			end
 
 
-			def to_hash
+			def as_json
 				{
 					path: path.to_s,
 					properties: properties.reduce({}) { |properties, property| properties[property.name.to_s.to_sym] = property.value; properties }

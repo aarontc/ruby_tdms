@@ -65,11 +65,11 @@ module TDMS
 		# 	}
 		# ]
 		# }
-		def to_hash
+		def as_json
 			{
-				file: objects.find { |object| object.is_a? Objects::File }.to_hash,
-				groups: objects.select { |object| object.is_a? Objects::Group}.map(&:to_hash),
-				channels: channels.map(&:to_hash)
+				file: objects.find { |object| object.is_a? Objects::File }.as_json,
+				groups: objects.select { |object| object.is_a? Objects::Group}.map(&:as_json),
+				channels: channels.map(&:as_json)
 			}
 		end
 

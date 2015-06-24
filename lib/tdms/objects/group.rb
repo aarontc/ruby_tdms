@@ -11,7 +11,7 @@ module TDMS
 			end
 
 
-			def to_hash
+			def as_json
 				super.merge({
 						channel_count: @channels.length
 					})
