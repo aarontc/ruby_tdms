@@ -35,5 +35,19 @@ module TDMS
 		def values
 			@values ||= AggregateChannelEnumerator.new @channels
 		end
+
+
+		def to_hash
+			result = @channels[0].to_hash
+			# Iterate over all channel objects and update properties
+			result[:properties] = @channels.reduce({}) do |properties, channel|
+				channel.properties.each do |property|
+					properties[property.name.to_sym] = property.value
+				end
+				properties
+			end
+			result[:values] = values.to_a
+			result
+		end
 	end
 end

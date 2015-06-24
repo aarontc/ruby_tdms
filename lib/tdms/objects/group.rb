@@ -9,6 +9,13 @@ module TDMS
 				super
 				@channels = []
 			end
+
+
+			def to_hash
+				super.merge({
+						channel_count: @channels.length
+					})
+			end
 		end
 	end
 end

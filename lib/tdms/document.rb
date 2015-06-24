@@ -22,6 +22,11 @@ module TDMS
 		end
 
 
+		def groups
+			objects.select { |object| object.is_a? Objects::Group }
+		end
+
+
 		def objects
 			segments.flat_map { |segment| segment.objects }
 		end
@@ -30,6 +35,42 @@ module TDMS
 		# @return [Array<TDMS::Objects::Channel>] The un-aggregated channel objects in the current document.
 		def raw_channels
 			objects.select { |object| object.is_a? Objects::Channel }
+		end
+
+
+		# Returns a hash representation of the entire TDMS document, looking vaguely like:
+		# {
+		# file : [
+		# 	properties: {}
+		# ],
+		# 	groups : [
+		# 	{
+		# 		path: '/Time Domain',
+		# 		properties: {}
+		#
+		# 	}
+		# ],
+		# 	channels : [
+		# 	{
+		# 		path: '/Time Domain/Current Phase A',
+		# 		name: 'Current Phase A',
+		# 		properties: { 'wf_start': 2015-05-23 05:22:22 },
+		# 		values: [
+		# 			1,
+		# 			2,
+		# 			3,
+		# 			4,
+		# 			5
+		# 		]
+		# 	}
+		# ]
+		# }
+		def to_hash
+			{
+				file: objects.find { |object| object.is_a? Objects::File }.to_hash,
+				groups: objects.select { |object| object.is_a? Objects::Group}.map(&:to_hash),
+				channels: channels.map(&:to_hash)
+			}
 		end
 
 		protected

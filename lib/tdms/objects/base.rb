@@ -21,6 +21,14 @@ module TDMS
 					@properties << stream.read_property(@segment.big_endian?)
 				end
 			end
+
+
+			def to_hash
+				{
+					path: path.to_s,
+					properties: properties.reduce({}) { |properties, property| properties[property.name.to_s.to_sym] = property.value; properties }
+				}
+			end
 		end
 	end
 end

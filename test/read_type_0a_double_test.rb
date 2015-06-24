@@ -3,11 +3,13 @@ require_relative 'test_helper'
 class ReadType0aDoubleTest < Minitest::Test
 
 	def test_reads_one_double_channel_in_one_segment
-		filename = fixture_filename('type_0a_double_one_segment')
-		doc = TDMS::File.parse(filename)
+		filename = fixture_filename 'type_0a_double_one_segment'
+		doc = TDMS::File.parse filename
 
 		assert_equal 1, doc.segments.size
 		assert_equal 1, doc.channels.size
+		assert_equal 1, doc.groups.size
+		assert_equal 1, doc.groups[0].channels.size
 		assert_equal TDMS::DataTypes::Double::ID, doc.channels[0].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/double_group/double_channel' }
@@ -18,8 +20,8 @@ class ReadType0aDoubleTest < Minitest::Test
 	end
 
 	def test_reads_two_double_channels_in_one_segment
-		filename = fixture_filename('type_0a_double_two_channels_one_segment')
-		doc = TDMS::File.parse(filename)
+		filename = fixture_filename 'type_0a_double_two_channels_one_segment'
+		doc = TDMS::File.parse filename
 
 		assert_equal 1, doc.segments.size
 		assert_equal 2, doc.channels.size
@@ -38,8 +40,8 @@ class ReadType0aDoubleTest < Minitest::Test
 	end
 
 	def test_reads_one_double_channel_across_three_segments
-		filename = fixture_filename('type_0a_double_three_segments')
-		doc = TDMS::File.parse(filename)
+		filename = fixture_filename 'type_0a_double_three_segments'
+		doc = TDMS::File.parse filename
 
 		assert_equal 3, doc.segments.size
 		assert_equal 1, doc.channels.size

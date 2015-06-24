@@ -19,6 +19,16 @@ module TDMS
 			end
 
 
+			def to_hash
+				super.merge({
+						name: name,
+						data_type: data_type.name.split('::').last,
+						dimensions: dimensions,
+						values: values.to_a
+					})
+			end
+
+
 			# Get all data from the stream to configure ourself with data type, number of values, etc.
 			def parse_stream(stream, raw_index)
 				@data_type_id = stream.read_u32
