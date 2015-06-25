@@ -7,11 +7,11 @@ class ReadType44TimestampTest < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
-		assert_equal 1, doc.segments[0].objects.size
-		assert_equal TDMS::DataType::Timestamp::Id, doc.segments[0].objects[0].data_type_id
+		assert_equal 1, doc.channels.size
+		assert_equal TDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
 
 
-		chan = doc.channels.find { |ch| ch.path == "/'timestamp_group'/'timestamp_channel'" }
+		chan = doc.channels.find { |ch| ch.path == '/timestamp_group/timestamp_channel' }
 		assert_equal 3, chan.values.size
 
 		expected = ['1904-01-01 00:00:00', '2008-06-07 01:23:45', '1894-03-15 13:23:45']
@@ -23,16 +23,16 @@ class ReadType44TimestampTest < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
-		assert_equal 2, doc.segments[0].objects.size
-		assert_equal TDMS::DataType::Timestamp::Id, doc.segments[0].objects[0].data_type_id
-		assert_equal TDMS::DataType::Timestamp::Id, doc.segments[0].objects[1].data_type_id
+		assert_equal 2, doc.channels.size
+		assert_equal TDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
+		assert_equal TDMS::DataTypes::Timestamp::ID, doc.channels[1].data_type_id
 
-		chan = doc.channels.find { |ch| ch.path == "/'timestamp_group'/'timestamp_channel_a'" }
+		chan = doc.channels.find { |ch| ch.path == '/timestamp_group/timestamp_channel_a' }
 		assert_equal 3, chan.values.size
 		expected = ['1904-01-01 00:00:00', '2008-06-07 01:23:45', '1894-03-15 13:23:45']
 		assert_equal expected, chan.values.map { |dt| dt.strftime('%Y-%m-%d %H:%M:%S') }
 
-		chan = doc.channels.find { |ch| ch.path == "/'timestamp_group'/'timestamp_channel_b'" }
+		chan = doc.channels.find { |ch| ch.path == '/timestamp_group/timestamp_channel_b' }
 		assert_equal 3, chan.values.size
 		expected = ['1894-03-15 13:23:45', '2008-06-07 01:23:45', '1904-01-01 00:00:00']
 		assert_equal expected, chan.values.map { |dt| dt.strftime('%Y-%m-%d %H:%M:%S') }
@@ -43,14 +43,14 @@ class ReadType44TimestampTest < Minitest::Test
 		doc = TDMS::File.parse(filename)
 
 		assert_equal 3, doc.segments.size
-		assert_equal 1, doc.segments[0].objects.size
+		assert_equal 1, doc.channels.size
 		assert_equal 1, doc.segments[1].objects.size
 		assert_equal 1, doc.segments[2].objects.size
-		assert_equal TDMS::DataType::Timestamp::Id, doc.segments[0].objects[0].data_type_id
-		assert_equal TDMS::DataType::Timestamp::Id, doc.segments[1].objects[0].data_type_id
-		assert_equal TDMS::DataType::Timestamp::Id, doc.segments[2].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
+		assert_equal TDMS::DataTypes::Timestamp::ID, doc.segments[1].objects[0].data_type_id
+		assert_equal TDMS::DataTypes::Timestamp::ID, doc.segments[2].objects[0].data_type_id
 
-		chan = doc.channels.find { |ch| ch.path == "/'timestamp_group'/'timestamp_channel'" }
+		chan = doc.channels.find { |ch| ch.path == '/timestamp_group/timestamp_channel' }
 		assert_equal 9, chan.values.size
 
 		expected = ['1904-01-01 00:00:00', '2008-06-07 01:23:45', '1894-03-15 13:23:45',

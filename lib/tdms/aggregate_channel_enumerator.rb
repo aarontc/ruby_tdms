@@ -1,27 +1,4 @@
 module TDMS
-
-	class AggregateChannel
-		def initialize(channels=[])
-			@channels = channels
-		end
-
-		def path
-			@channels[0].path
-		end
-
-		def name
-			@channels[0].name
-		end
-
-		def data_type
-			@channels[0].data_type
-		end
-
-		def values
-			@values ||= AggregateChannelEnumerator.new(@channels)
-		end
-	end
-
 	class AggregateChannelEnumerator
 		include Enumerable
 
@@ -36,9 +13,11 @@ module TDMS
 			end
 		end
 
+
 		def size
 			@size ||= @channels.inject(0) { |sum, chan| sum += chan.values.size }
 		end
+
 
 		def each
 			@channels.each do |channel|
@@ -46,10 +25,10 @@ module TDMS
 			end
 		end
 
+
 		def [](i)
 			if (i < 0) || (i >= size)
-				raise RangeError, "Channel %s has a range of 0 to %d, got invalid index: %d" %
-						[@channels[0].path, size - 1, i]
+				raise RangeError, 'Channel %s has a range of 0 to %d, got invalid index: %d' % [@channels[0].path, size - 1, i]
 			end
 
 			channel, offset = nil, nil
@@ -67,5 +46,4 @@ module TDMS
 			channel.values[i - offset]
 		end
 	end
-
 end

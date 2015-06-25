@@ -6,15 +6,15 @@ Object Hierarchy
 
   example_events.tdms (File)                /
    |
-   +-- Measured Data (Group)                /'Measured Data'
+   +-- Measured Data (Group)                /Measured Data
    |     |
-   |     +-- Amplitude Sweep (Channel)      /'Measured Data'/'Amplitude Sweep'
-   |     +-- Phase Sweep (Channel)          /'Measured Data'/'Phase Sweep'
+   |     +-- Amplitude Sweep (Channel)      /Measured Data/Amplitude Sweep
+   |     +-- Phase Sweep (Channel)          /Measured Data/Phase Sweep
    |
-   +-- Dr. T's Events (Group)               /'Dr. T''s Events'
+   +-- Dr. T's Events (Group)               /Dr. T's Events
          |
-         +-- Time (Channel)                 /'Dr. T''s Events'/'Time'
-         +-- Description (Channel)          /'Dr. T''s Events'/'Description'
+         +-- Time (Channel)                 /Dr. T's Events/Time
+         +-- Description (Channel)          /Dr. T's Events/Description
 
   There are exactly 3 levels of objects in TDMS:
    - File (every TDMS file must have one)
@@ -27,8 +27,8 @@ Object Hierarchy
 
     Object Type      Example Path         Number of Path Segments
     File             /                    0
-    Group            /'Group'             1
-    Channel          /'Group'/'Channel'   2
+    Group            /Group               1
+    Channel          /Group/Channel       2
 
 
 File Structure
