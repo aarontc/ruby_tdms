@@ -55,6 +55,8 @@ module TDMS
 				@dimensions = previous_channel.dimensions
 
 				@chunk_length = @data_length * @dimensions * @chunk_value_count # Size of the data for this channel in a given chunk.
+
+				super stream, previous_channel
 			end
 
 
