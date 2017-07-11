@@ -4,11 +4,11 @@ class ReadType08Uint64Test < Minitest::Test
 
 	def test_reads_one_uint64_channel_in_one_segment
 		filename = fixture_filename('type_08_uint64_one_segment')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
 		assert_equal 1, doc.channels.size
-		assert_equal TDMS::DataTypes::UInt64::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::UInt64::ID, doc.channels[0].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/uint64_group/uint64_channel' }
 		assert_equal 5, chan.values.size
@@ -19,12 +19,12 @@ class ReadType08Uint64Test < Minitest::Test
 
 	def test_reads_two_uint64_channels_in_one_segment
 		filename = fixture_filename('type_08_uint64_two_channels_one_segment')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
 		assert_equal 2, doc.channels.size
-		assert_equal TDMS::DataTypes::UInt64::ID, doc.channels[0].data_type_id
-		assert_equal TDMS::DataTypes::UInt64::ID, doc.channels[1].data_type_id
+		assert_equal RubyTDMS::DataTypes::UInt64::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::UInt64::ID, doc.channels[1].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/uint64_group/uint64_channel_a' }
 		assert_equal 5, chan.values.size
@@ -39,15 +39,15 @@ class ReadType08Uint64Test < Minitest::Test
 
 	def test_reads_one_uint64_channel_across_three_segments
 		filename = fixture_filename('type_08_uint64_three_segments')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 3, doc.segments.size
 		assert_equal 1, doc.channels.size
 		assert_equal 1, doc.segments[1].objects.size
 		assert_equal 1, doc.segments[2].objects.size
-		assert_equal TDMS::DataTypes::UInt64::ID, doc.channels[0].data_type_id
-		assert_equal TDMS::DataTypes::UInt64::ID, doc.segments[1].objects[0].data_type_id
-		assert_equal TDMS::DataTypes::UInt64::ID, doc.segments[2].objects[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::UInt64::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::UInt64::ID, doc.segments[1].objects[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::UInt64::ID, doc.segments[2].objects[0].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/uint64_group/uint64_channel' }
 		assert_equal 15, chan.values.size

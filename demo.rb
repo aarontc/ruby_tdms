@@ -1,7 +1,7 @@
-require_relative 'lib/tdms'
+require_relative 'lib/ruby_tdms'
 
 filename = File.dirname(__FILE__) + '/test/fixtures/example.tdms'
-doc = TDMS::File.parse(filename)
+doc = RubyTDMS::File.parse(filename)
 
 ch1 = doc.channels.find { |c| c.name == 'StatisticsText' }
 ch2 = doc.channels.find { |c| c.name == 'Res_Noise_1' }

@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 
-require_relative '../lib/tdms'
+require_relative '../lib/ruby_tdms'
 
 class Minitest::Test
 

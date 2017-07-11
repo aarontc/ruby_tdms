@@ -35,7 +35,7 @@ WRITING
 
 (Note: writing is not yet supported)
 
-tdms = TDMS::File.new("some filename")
+tdms = RubyTDMS::File.new("some filename")
 seg = tdms.segment.build
 
 group = seg.groups.build("foo")

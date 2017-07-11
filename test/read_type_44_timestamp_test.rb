@@ -4,11 +4,11 @@ class ReadType44TimestampTest < Minitest::Test
 
 	def test_reads_one_timestamp_channel_in_one_segment
 		filename = fixture_filename('type_44_timestamp_one_segment')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
 		assert_equal 1, doc.channels.size
-		assert_equal TDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
 
 
 		chan = doc.channels.find { |ch| ch.path == '/timestamp_group/timestamp_channel' }
@@ -20,12 +20,12 @@ class ReadType44TimestampTest < Minitest::Test
 
 	def test_reads_two_timestamp_channels_in_one_segment
 		filename = fixture_filename('type_44_timestamp_two_channels_one_segment')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
 		assert_equal 2, doc.channels.size
-		assert_equal TDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
-		assert_equal TDMS::DataTypes::Timestamp::ID, doc.channels[1].data_type_id
+		assert_equal RubyTDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Timestamp::ID, doc.channels[1].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/timestamp_group/timestamp_channel_a' }
 		assert_equal 3, chan.values.size
@@ -40,15 +40,15 @@ class ReadType44TimestampTest < Minitest::Test
 
 	def test_reads_one_timestamp_channel_across_three_segments
 		filename = fixture_filename('type_44_timestamp_three_segments')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 3, doc.segments.size
 		assert_equal 1, doc.channels.size
 		assert_equal 1, doc.segments[1].objects.size
 		assert_equal 1, doc.segments[2].objects.size
-		assert_equal TDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
-		assert_equal TDMS::DataTypes::Timestamp::ID, doc.segments[1].objects[0].data_type_id
-		assert_equal TDMS::DataTypes::Timestamp::ID, doc.segments[2].objects[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Timestamp::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Timestamp::ID, doc.segments[1].objects[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Timestamp::ID, doc.segments[2].objects[0].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/timestamp_group/timestamp_channel' }
 		assert_equal 9, chan.values.size
