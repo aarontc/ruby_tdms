@@ -1,14 +1,13 @@
 require_relative 'test_helper'
 
 class ReadType01Int8Test < Minitest::Test
-
 	def test_reads_one_int8_channel_in_one_segment
 		filename = fixture_filename('type_01_int8_one_segment')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
 		assert_equal 1, doc.channels.size
-		assert_equal TDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/int8_group/int8_channel' }
 		assert_equal 5, chan.values.size
@@ -17,14 +16,15 @@ class ReadType01Int8Test < Minitest::Test
 		assert_equal expected, chan.values.to_a
 	end
 
+
 	def test_reads_two_int8_channels_in_one_segment
 		filename = fixture_filename('type_01_int8_two_channels_one_segment')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 1, doc.segments.size
 		assert_equal 2, doc.channels.size
-		assert_equal TDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
-		assert_equal TDMS::DataTypes::Int8::ID, doc.channels[1].data_type_id
+		assert_equal RubyTDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Int8::ID, doc.channels[1].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/int8_group/int8_channel_a' }
 		assert_equal 5, chan.values.size
@@ -37,17 +37,18 @@ class ReadType01Int8Test < Minitest::Test
 		assert_equal expected, chan.values.to_a
 	end
 
+
 	def test_reads_one_int8_channel_across_three_segments
 		filename = fixture_filename('type_01_int8_three_segments')
-		doc = TDMS::File.parse(filename)
+		doc = RubyTDMS::File.parse(filename)
 
 		assert_equal 3, doc.segments.size
 		assert_equal 1, doc.channels.size
 		assert_equal 1, doc.segments[1].objects.size
 		assert_equal 1, doc.segments[2].objects.size
-		assert_equal TDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
-		assert_equal TDMS::DataTypes::Int8::ID, doc.segments[1].objects[0].data_type_id
-		assert_equal TDMS::DataTypes::Int8::ID, doc.segments[2].objects[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Int8::ID, doc.channels[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Int8::ID, doc.segments[1].objects[0].data_type_id
+		assert_equal RubyTDMS::DataTypes::Int8::ID, doc.segments[2].objects[0].data_type_id
 
 		chan = doc.channels.find { |ch| ch.path == '/int8_group/int8_channel' }
 		assert_equal 15, chan.values.size
@@ -56,5 +57,4 @@ class ReadType01Int8Test < Minitest::Test
 			-128, -64, 0, 63, 127]
 		assert_equal expected, chan.values.to_a
 	end
-
 end

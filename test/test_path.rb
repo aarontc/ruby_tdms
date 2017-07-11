@@ -1,13 +1,12 @@
 require_relative 'test_helper'
 
 class TestPath < Minitest::Test
-
 	# Ensures the split works properly
 	def test_raw_split
 		input = "/'root'/'other/thing'/'it/''/s whatever'/'and/then/there''s/both!'/'stuff'/'whatever'"
 
 		expected = ['root', 'other/thing', "it/'/s whatever", "and/then/there's/both!", 'stuff', 'whatever']
-		uut = TDMS::Path.new raw: input
+		uut = RubyTDMS::Path.new raw: input
 		actual = uut.to_a
 		assert_equal expected, actual
 	end
@@ -19,7 +18,7 @@ class TestPath < Minitest::Test
 		input = "/'root'/'other/thing'/'it/''/s whatever'/'and/then/there''s/both!'/'stuff'/'whatever'/"
 
 		expected = ['root', 'other/thing', "it/'/s whatever", "and/then/there's/both!", 'stuff', 'whatever']
-		uut = TDMS::Path.new raw: input
+		uut = RubyTDMS::Path.new raw: input
 		actual = uut.to_a
 		assert_equal expected, actual
 	end
@@ -27,7 +26,7 @@ class TestPath < Minitest::Test
 
 	def test_raw
 		input = "/'root'/'other/thing'/'it/''/s whatever'/'and/then/there''s/both!'/'stuff'/'whatever'"
-		uut = TDMS::Path.new raw: input
+		uut = RubyTDMS::Path.new raw: input
 		actual = uut.raw
 		assert_equal input, actual
 	end
@@ -37,16 +36,17 @@ class TestPath < Minitest::Test
 		input = "/'root'/'other/thing'/'it/''/s whatever'/'and/then/there''s/both!'/'stuff'/'whatever'/"
 
 		expected = "/root/other\\/thing/it\\/'\\/s whatever/and\\/then\\/there's\\/both!/stuff/whatever"
-		uut = TDMS::Path.new raw: input
+		uut = RubyTDMS::Path.new raw: input
 		actual = uut.path
 		assert_equal expected, actual
 	end
+
 
 	def test_path_split
 		input = "/root/other\\/thing/it\\/'\\/s whatever/and\\/then\\/there's\\/both!/stuff/whatever"
 
 		expected = ['root', 'other/thing', "it/'/s whatever", "and/then/there's/both!", 'stuff', 'whatever']
-		uut = TDMS::Path.new path: input
+		uut = RubyTDMS::Path.new path: input
 		actual = uut.to_a
 		assert_equal expected, actual
 	end
@@ -56,7 +56,7 @@ class TestPath < Minitest::Test
 		expected = "/'root'/'other/thing'/'it/''/s whatever'/'and/then/there''s/both!'/'stuff'/'whatever'"
 
 		input = "/root/other\\/thing/it\\/'\\/s whatever/and\\/then\\/there's\\/both!/stuff/whatever"
-		uut = TDMS::Path.new path: input
+		uut = RubyTDMS::Path.new path: input
 		actual = uut.raw
 		assert_equal expected, actual
 	end
