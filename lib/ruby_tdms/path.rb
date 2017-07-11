@@ -33,7 +33,7 @@ module RubyTDMS
 
 
 		def path
-			'/' + @parts.map{ |part| part.gsub('/', '\/') }.join('/')
+			'/' + @parts.map { |part| part.gsub('/', '\/') }.join('/')
 		end
 
 
@@ -72,6 +72,7 @@ module RubyTDMS
 			end
 		end
 
+
 		alias eql? ==
 
 
@@ -93,5 +94,4 @@ module RubyTDMS
 			"'#{part.gsub(/'/, "''")}'"
 		end
 	end
-
 end

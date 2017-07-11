@@ -5,6 +5,7 @@ module RubyTDMS
 		class Base
 			attr_reader :path, :properties, :segment, :stream
 
+
 			def initialize(path, document, segment)
 				@path = path
 				@document = document
@@ -31,7 +32,6 @@ module RubyTDMS
 					properties: properties.reduce({}) { |properties, property| properties[property.name.to_s.to_sym] = property.value; properties }
 				}
 			end
-
 
 
 			protected

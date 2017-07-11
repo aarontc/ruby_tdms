@@ -7,6 +7,7 @@ module RubyTDMS
 		class Channel < Base
 			attr_reader :chunk_offsets, :chunk_value_count, :data_length, :data_type, :data_type_id, :dimensions, :chunk_length, :raw_data_offset, :value_count, :value_offset
 
+
 			def initialize(path, document, segment)
 				super
 				@chunk_offsets = []
@@ -21,11 +22,11 @@ module RubyTDMS
 
 			def as_json
 				super.merge({
-						name: name,
-						data_type: data_type.name.split('::').last,
-						dimensions: dimensions,
-						values: values.to_a
-					})
+					name: name,
+					data_type: data_type.name.split('::').last,
+					dimensions: dimensions,
+					values: values.to_a
+				})
 			end
 
 
@@ -88,14 +89,13 @@ module RubyTDMS
 			end
 
 
-
 			def values
 				@values ||= begin
 					klass = if @data_type::LENGTH_IN_BYTES.nil?
-								StringChannelEnumerator
-							else
-								ChannelEnumerator
-							end
+						StringChannelEnumerator
+					else
+						ChannelEnumerator
+					end
 
 					klass.new self
 				end

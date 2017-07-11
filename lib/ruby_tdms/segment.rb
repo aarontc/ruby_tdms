@@ -14,6 +14,7 @@ module RubyTDMS
 		attr_reader :document
 		attr_reader :objects, :tag, :version, :length, :meta_data_length, :meta_data_offset, :raw_data_offset, :chunk_count
 
+
 		def initialize(document)
 			@document = document
 			@objects = []
@@ -102,6 +103,5 @@ module RubyTDMS
 			@chunk_count = @raw_data_length / @chunk_length
 			raw_channels.each { |object| object.calculate_offsets }
 		end
-
 	end
 end

@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType21BooleanTest < Minitest::Test
-
 	def test_reads_one_boolean_channel_in_one_segment
 		filename = fixture_filename('type_21_boolean_one_segment')
 		doc = RubyTDMS::File.parse(filename)
@@ -16,6 +15,7 @@ class ReadType21BooleanTest < Minitest::Test
 		expected = [true, false]
 		assert_equal expected, chan.values.to_a
 	end
+
 
 	def test_reads_two_boolean_channels_in_one_segment
 		filename = fixture_filename('type_21_boolean_two_channels_one_segment')
@@ -37,6 +37,7 @@ class ReadType21BooleanTest < Minitest::Test
 		assert_equal expected, chan.values.to_a
 	end
 
+
 	def test_reads_one_boolean_channel_across_three_segments
 		filename = fixture_filename('type_21_boolean_three_segments')
 		doc = RubyTDMS::File.parse(filename)
@@ -54,5 +55,4 @@ class ReadType21BooleanTest < Minitest::Test
 		expected = [true, false, true, false, true, false]
 		assert_equal expected, chan.values.to_a
 	end
-
 end

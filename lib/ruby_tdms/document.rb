@@ -7,6 +7,7 @@ module RubyTDMS
 		#attr_reader :segments, :channels, :file
 		attr_reader :segments, :stream
 
+
 		def initialize(stream)
 			@channel_aggregates = []
 			@segments = []
@@ -68,10 +69,11 @@ module RubyTDMS
 		def as_json
 			{
 				file: objects.find { |object| object.is_a? Objects::File }.as_json,
-				groups: objects.select { |object| object.is_a? Objects::Group}.map(&:as_json),
+				groups: objects.select { |object| object.is_a? Objects::Group }.map(&:as_json),
 				channels: channels.map(&:as_json)
 			}
 		end
+
 
 		protected
 

@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType07Uint32Test < Minitest::Test
-
 	def test_reads_one_uint32_channel_in_one_segment
 		filename = fixture_filename 'type_07_uint32_one_segment'
 		doc = RubyTDMS::File.parse filename
@@ -58,5 +57,4 @@ class ReadType07Uint32Test < Minitest::Test
 			0, 1, 1_073_741_823, 2_147_483_647, 4_294_967_295]
 		assert_equal expected, chan.values.to_a
 	end
-
 end

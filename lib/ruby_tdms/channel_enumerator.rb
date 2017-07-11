@@ -2,6 +2,7 @@ module RubyTDMS
 	class ChannelEnumerator
 		include Enumerable
 
+
 		def initialize(channel)
 			@channel = channel
 		end

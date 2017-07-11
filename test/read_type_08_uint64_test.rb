@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType08Uint64Test < Minitest::Test
-
 	def test_reads_one_uint64_channel_in_one_segment
 		filename = fixture_filename('type_08_uint64_one_segment')
 		doc = RubyTDMS::File.parse(filename)
@@ -16,6 +15,7 @@ class ReadType08Uint64Test < Minitest::Test
 		expected = [0, 1, 4_294_967_295, 9_223_372_036_854_775_807, 18_446_744_073_709_551_615]
 		assert_equal expected, chan.values.to_a
 	end
+
 
 	def test_reads_two_uint64_channels_in_one_segment
 		filename = fixture_filename('type_08_uint64_two_channels_one_segment')
@@ -37,6 +37,7 @@ class ReadType08Uint64Test < Minitest::Test
 		assert_equal expected, chan.values.to_a
 	end
 
+
 	def test_reads_one_uint64_channel_across_three_segments
 		filename = fixture_filename('type_08_uint64_three_segments')
 		doc = RubyTDMS::File.parse(filename)
@@ -56,5 +57,4 @@ class ReadType08Uint64Test < Minitest::Test
 			0, 1, 4_294_967_295, 9_223_372_036_854_775_807, 18_446_744_073_709_551_615]
 		assert_equal expected, chan.values.to_a
 	end
-
 end

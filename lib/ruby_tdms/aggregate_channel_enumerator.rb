@@ -2,6 +2,7 @@ module RubyTDMS
 	class AggregateChannelEnumerator
 		include Enumerable
 
+
 		def initialize(channels)
 			@channels = channels
 			@offsets = []

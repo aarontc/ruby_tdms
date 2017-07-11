@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType44TimestampTest < Minitest::Test
-
 	def test_reads_one_timestamp_channel_in_one_segment
 		filename = fixture_filename('type_44_timestamp_one_segment')
 		doc = RubyTDMS::File.parse(filename)
@@ -17,6 +16,7 @@ class ReadType44TimestampTest < Minitest::Test
 		expected = ['1904-01-01 00:00:00', '2008-06-07 01:23:45', '1894-03-15 13:23:45']
 		assert_equal expected, chan.values.map { |dt| dt.strftime('%Y-%m-%d %H:%M:%S') }
 	end
+
 
 	def test_reads_two_timestamp_channels_in_one_segment
 		filename = fixture_filename('type_44_timestamp_two_channels_one_segment')
@@ -38,6 +38,7 @@ class ReadType44TimestampTest < Minitest::Test
 		assert_equal expected, chan.values.map { |dt| dt.strftime('%Y-%m-%d %H:%M:%S') }
 	end
 
+
 	def test_reads_one_timestamp_channel_across_three_segments
 		filename = fixture_filename('type_44_timestamp_three_segments')
 		doc = RubyTDMS::File.parse(filename)
@@ -58,5 +59,4 @@ class ReadType44TimestampTest < Minitest::Test
 			'1904-01-01 00:00:00', '2008-06-07 01:23:45', '1894-03-15 13:23:45']
 		assert_equal expected, chan.values.map { |dt| dt.strftime('%Y-%m-%d %H:%M:%S') }
 	end
-
 end

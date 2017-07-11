@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType04Int64Test < Minitest::Test
-
 	def test_reads_one_int64_channel_in_one_segment
 		filename = fixture_filename 'type_04_int64_one_segment'
 		doc = RubyTDMS::File.parse filename
@@ -62,5 +61,4 @@ class ReadType04Int64Test < Minitest::Test
 			4_611_686_018_427_387_903, 9_223_372_036_854_775_807,]
 		assert_equal expected, chan.values.to_a
 	end
-
 end

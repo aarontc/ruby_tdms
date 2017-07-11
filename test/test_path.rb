@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class TestPath < Minitest::Test
-
 	# Ensures the split works properly
 	def test_raw_split
 		input = "/'root'/'other/thing'/'it/''/s whatever'/'and/then/there''s/both!'/'stuff'/'whatever'"
@@ -41,6 +40,7 @@ class TestPath < Minitest::Test
 		actual = uut.path
 		assert_equal expected, actual
 	end
+
 
 	def test_path_split
 		input = "/root/other\\/thing/it\\/'\\/s whatever/and\\/then\\/there's\\/both!/stuff/whatever"

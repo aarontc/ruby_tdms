@@ -8,6 +8,7 @@ module RubyTDMS
 				TYPES_BY_ID[id] || raise(ArgumentError, "No matching type for ID #{id.inspect}")
 			end
 
+
 			def to_hash
 				Base.subclasses.reduce({}) do |result, klass|
 					result[klass::ID] = klass

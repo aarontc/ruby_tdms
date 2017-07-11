@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType0aDoubleTest < Minitest::Test
-
 	def test_reads_one_double_channel_in_one_segment
 		filename = fixture_filename 'type_0a_double_one_segment'
 		doc = RubyTDMS::File.parse filename
@@ -18,6 +17,7 @@ class ReadType0aDoubleTest < Minitest::Test
 		expected = [-2.02, -1.01, 0, 1.01, 2.02]
 		assert_equal expected, chan.values.to_a
 	end
+
 
 	def test_reads_two_double_channels_in_one_segment
 		filename = fixture_filename 'type_0a_double_two_channels_one_segment'
@@ -39,6 +39,7 @@ class ReadType0aDoubleTest < Minitest::Test
 		assert_equal expected, chan.values.to_a
 	end
 
+
 	def test_reads_one_double_channel_across_three_segments
 		filename = fixture_filename 'type_0a_double_three_segments'
 		doc = RubyTDMS::File.parse filename
@@ -58,5 +59,4 @@ class ReadType0aDoubleTest < Minitest::Test
 			-2.02, -1.01, 0.0, 1.01, 2.02]
 		assert_equal expected, chan.values.to_a
 	end
-
 end

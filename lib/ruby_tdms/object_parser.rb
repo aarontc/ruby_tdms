@@ -29,7 +29,7 @@ module RubyTDMS
 							previous_channel = document.objects.reverse.find { |object| object.path == path }
 							Objects::Channel.new(path, document, segment).tap { |obj|
 								obj.continue_stream stream, raw_index, previous_channel
-								group = document.objects.find { |object| object.is_a? Objects::Group and object.path == Path.new(parts: path.to_a[0..-2])}
+								group = document.objects.find { |object| object.is_a? Objects::Group and object.path == Path.new(parts: path.to_a[0..-2]) }
 								group.channels << obj if group
 							}
 						else

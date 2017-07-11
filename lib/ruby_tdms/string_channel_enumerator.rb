@@ -2,6 +2,7 @@ module RubyTDMS
 	class StringChannelEnumerator
 		include Enumerable
 
+
 		def initialize(channel)
 			@channel = channel
 
@@ -44,6 +45,5 @@ module RubyTDMS
 				j += 1
 			end
 		end
-
 	end
 end

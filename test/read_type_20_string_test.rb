@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType20StringTest < Minitest::Test
-
 	def test_reads_one_string_channel_in_one_segment
 		filename = fixture_filename 'type_20_string_one_segment'
 		doc = RubyTDMS::File.parse filename
@@ -60,5 +59,4 @@ class ReadType20StringTest < Minitest::Test
                   twenty-seven twenty-eight twenty-nine}
 		assert_equal expected, chan.values.to_a
 	end
-
 end

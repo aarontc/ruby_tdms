@@ -15,7 +15,9 @@ TDMS is a binary file format for measurement data. It was created by National In
 
 National Instruments software such as LabVIEW, DIAdem, and Measurement Studio support reading and writing TDMS files. NI also provides a DLL written in C for using TDMS files on Windows.
 
-TDMS for Ruby was written to provide a convenient way to work with TDMS files on Unix-like platforms.
+RubyTDMS provides a convenient way to work with TDMS files on Unix-like platforms.
+
+The RubyTDMS gem was formerly known as "TDMS".
 DESCRIPTION
 	spec.homepage = 'https://github.com/aarontc/ruby_tdms'
 	spec.license = 'BSD'

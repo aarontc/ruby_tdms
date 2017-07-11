@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType03Int32Test < Minitest::Test
-
 	def test_reads_one_int32_channel_in_one_segment
 		filename = fixture_filename('type_03_int32_one_segment')
 		doc = RubyTDMS::File.parse(filename)
@@ -16,6 +15,7 @@ class ReadType03Int32Test < Minitest::Test
 		expected = [-2_147_483_648, -1_073_741_824, 0, 10_737_41_823, 2_147_483_647]
 		assert_equal expected, chan.values.to_a
 	end
+
 
 	def test_reads_two_int32_channels_in_one_segment
 		filename = fixture_filename('type_03_int32_two_channels_one_segment')
@@ -37,6 +37,7 @@ class ReadType03Int32Test < Minitest::Test
 		assert_equal expected, chan.values.to_a
 	end
 
+
 	def test_reads_one_int32_channel_across_three_segments
 		filename = fixture_filename('type_03_int32_three_segments')
 		doc = RubyTDMS::File.parse(filename)
@@ -56,5 +57,4 @@ class ReadType03Int32Test < Minitest::Test
 			-2_147_483_648, -1_073_741_824, 0, 10_737_41_823, 2_147_483_647]
 		assert_equal expected, chan.values.to_a
 	end
-
 end

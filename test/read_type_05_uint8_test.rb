@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class ReadType05Uint8Test < Minitest::Test
-
 	def test_reads_one_uint8_channel_in_one_segment
 		filename = fixture_filename('type_05_uint8_one_segment')
 		doc = RubyTDMS::File.parse(filename)
@@ -16,6 +15,7 @@ class ReadType05Uint8Test < Minitest::Test
 		expected = [0, 1, 62, 127, 255]
 		assert_equal expected, chan.values.to_a
 	end
+
 
 	def test_reads_two_uint8_channels_in_one_segment
 		filename = fixture_filename('type_05_uint8_two_channels_one_segment')
@@ -37,6 +37,7 @@ class ReadType05Uint8Test < Minitest::Test
 		assert_equal expected, chan.values.to_a
 	end
 
+
 	def test_reads_one_uint8_channel_across_three_segments
 		filename = fixture_filename('type_05_uint8_three_segments')
 		doc = RubyTDMS::File.parse(filename)
@@ -55,5 +56,4 @@ class ReadType05Uint8Test < Minitest::Test
 		actual = chan.values.to_a
 		assert_equal expected, actual, 'Reading values from TDMS file returned incorrect results'
 	end
-
 end

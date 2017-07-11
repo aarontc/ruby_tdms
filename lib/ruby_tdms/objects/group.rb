@@ -5,6 +5,7 @@ module RubyTDMS
 		class Group < Base
 			attr_reader :channels
 
+
 			def initialize(*args)
 				super
 				@channels = []
@@ -13,8 +14,8 @@ module RubyTDMS
 
 			def as_json
 				super.merge({
-						channel_count: @channels.length
-					})
+					channel_count: @channels.length
+				})
 			end
 		end
 	end
